@@ -79,10 +79,21 @@ export default {
   methods: {
     calc: function() {
       let pt = this.initialPt;
-      //   let medals = 0;
+      let medals = 0;
       while (pt < this.goalPt) {
         this.nomalPlayTimes++;
-        // const eventSpecialBounusRate = this.getEventSpecialBounusRate(pt);
+        const bounusRate =
+          this.scoreBounusRate +
+          this.specialBounusRate +
+          this.getEventSpecialBounusRate(pt);
+        pt += ((100 + bounusRate) / 100) * this.nomalBasisPt["easy1"];
+        medals += this.gainMedal;
+
+        // todo イベント曲
+        if (medals >= this.usedMedal) {
+          this.eventPlayTimes++;
+          medals -= this.usedMedal;
+        }
       }
     },
     getEventSpecialBounusRate: function(pt) {
