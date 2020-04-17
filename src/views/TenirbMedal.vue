@@ -18,7 +18,7 @@
           </select>
         </div>
         <p class="c-button-primary">
-          <input type="submit" value="Send" />
+          <input type="submit" value="Send" v-on:click="calc" />
         </p>
         <p class="c-button-primary">
           <input type="submit" value="Send" disabled="disabled" />
@@ -71,6 +71,8 @@ export default {
       period: 10,
       scoreBounusRate: 15,
       specialBounusRate: 0,
+      nomalLevel: "easy1",
+      eventLevel: "easy",
       // 結果
       nomalPlayTimes: 0,
       eventPlayTimes: 0
@@ -78,23 +80,40 @@ export default {
   },
   methods: {
     calc: function() {
+      // todo levelが不正の場合エラーにする
       let pt = this.initialPt;
       let medals = 0;
+      // 初期化
+      this.nomalPlayTimes = this.eventPlayTimes = 0;
       while (pt < this.goalPt) {
         this.nomalPlayTimes++;
-        const bounusRate =
-          this.scoreBounusRate +
-          this.specialBounusRate +
-          this.getEventSpecialBounusRate(pt);
-        pt += ((100 + bounusRate) / 100) * this.nomalBasisPt["easy1"];
+        pt += (1 + this.getBounusRate(pt)) * this.nomalBasisPt[this.nomalLevel];
+        if (pt >= this.goalPt) {
+          return;
+        }
         medals += this.gainMedal;
 
-        // todo イベント曲
-        if (medals >= this.usedMedal) {
+        // イベント曲
+        if (medals >= this.usedMedal[this.eventLevel]) {
           this.eventPlayTimes++;
-          medals -= this.usedMedal;
+          pt +=
+            (1 + this.getBounusRate(pt)) * this.eventBasisPt[this.eventLevel];
+          medals -= this.usedMedal[this.eventLevel];
+        }
+        // 無限ループ回避
+        if (this.nomalPlayTimes > 10000) {
+          return;
         }
       }
+    },
+    // 百分率を返す
+    getBounusRate: function(pt) {
+      return (
+        (this.scoreBounusRate +
+          this.specialBounusRate +
+          this.getEventSpecialBounusRate(pt)) /
+        100
+      );
     },
     getEventSpecialBounusRate: function(pt) {
       if (pt < 60000) {
