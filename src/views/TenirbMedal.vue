@@ -12,16 +12,19 @@
         </div>
         <div class="c-input">
           <label>ズバリ！ 目標は何ポイント？</label>
-          <input type="number" v-model.number="goalPt" /><span class="c-label"
-            >Pt</span
-          >
+          <input
+            type="number"
+            v-model.number="goalPt"
+            v-on:change="calc"
+          /><span class="c-label">Pt</span>
         </div>
         <div class="c-input">
           <label>今何ポイント？</label>
-          <input type="number" v-model.number="initialPt" /><span
-            class="c-label"
-            >Pt</span
-          >
+          <input
+            type="number"
+            v-model.number="initialPt"
+            v-on:change="calc"
+          /><span class="c-label">Pt</span>
         </div>
         <div class="c-input">
           <label>スコアボーナスはだいたい何％くらい取れる？</label>
@@ -30,6 +33,7 @@
             min="0"
             max="100"
             v-model.number="scoreBounusRate"
+            v-on:change="calc"
           /><span class="c-label">%</span>
         </div>
         <div class="c-input">
@@ -41,11 +45,12 @@
             min="0"
             max="100"
             v-model.number="specialBounusRate"
+            v-on:change="calc"
           /><span class="c-label">%</span>
         </div>
         <div class="c-pulldown">
           <label>通常曲のレベルは？</label>
-          <select v-model="nomalLevel">
+          <select v-model="nomalLevel" v-on:change="calc">
             <option
               v-for="(name, value) in nomalLevelList"
               :key="value"
@@ -56,7 +61,7 @@
         </div>
         <div class="c-pulldown">
           <label>イベント曲のレベルは？</label>
-          <select v-model="eventLevel">
+          <select v-model="eventLevel" v-on:change="calc">
             <option
               v-for="(name, value) in eventLevelList"
               :key="value"
