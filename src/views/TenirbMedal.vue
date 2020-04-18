@@ -29,8 +29,9 @@
       <p>
         {{ period }}日で{{ goalPt }}Ptを達成するには、<br />
         1日あたり<br />
-        通常曲を {{ nomalPlayTimes }} 回、<br />
-        イベント曲を {{ eventPlayTimes }} 回ほどプレイしましょう。<br />
+        通常曲を {{ nomalPlayTimes / period }} 回、<br />
+        イベント曲を
+        {{ eventPlayTimes / period }} 回ほどプレイしましょう。<br />
       </p>
     </div>
   </div>
