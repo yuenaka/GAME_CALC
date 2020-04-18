@@ -3,18 +3,66 @@
     <div class="c-form">
       <form>
         <div class="c-input">
-          <label>Text</label>
-          <input type="text" />
+          <label>イベントは残り何日？</label>
+          <input
+            type="number"
+            v-model.number="period"
+            v-on:change="calc"
+          /><span class="c-label">日</span>
+        </div>
+        <div class="c-input">
+          <label>ズバリ！ 目標は何ポイント？</label>
+          <input type="number" v-model.number="goalPt" /><span class="c-label"
+            >Pt</span
+          >
+        </div>
+        <div class="c-input">
+          <label>今何ポイント？</label>
+          <input type="number" v-model.number="initialPt" /><span
+            class="c-label"
+            >Pt</span
+          >
+        </div>
+        <div class="c-input">
+          <label>スコアボーナスはだいたい何％くらい取れる？</label>
+          <input
+            type="number"
+            min="0"
+            max="100"
+            v-model.number="scoreBounusRate"
+          /><span class="c-label">%</span>
+        </div>
+        <div class="c-input">
+          <label
+            >特攻ボーナスは何％持ってる？（※今イベントのポイントボーナスSRは除く）</label
+          >
+          <input
+            type="number"
+            min="0"
+            max="100"
+            v-model.number="specialBounusRate"
+          /><span class="c-label">%</span>
         </div>
         <div class="c-pulldown">
-          <p>Pulldown</p>
-          <select>
-            <option value="">選択してください</option>
-            <option value="test1">test1</option>
-            <option value="test2">test2</option>
-            <option value="test3">test3</option>
-            <option value="test4">test4</option>
-            <option value="test5">test5</option>
+          <label>通常曲のレベルは？</label>
+          <select v-model="nomalLevel">
+            <option
+              v-for="(name, value) in nomalLevelList"
+              :key="value"
+              :value="value"
+              >{{ name }}</option
+            >
+          </select>
+        </div>
+        <div class="c-pulldown">
+          <label>イベント曲のレベルは？</label>
+          <select v-model="eventLevel">
+            <option
+              v-for="(name, value) in eventLevelList"
+              :key="value"
+              :value="value"
+              >{{ name }}</option
+            >
           </select>
         </div>
         <p class="c-button-primary">
@@ -42,6 +90,23 @@ export default {
   data: function() {
     return {
       // 固定値
+      nomalLevelList: {
+        easy1: "EASY (★4~6)",
+        easy2: "EASY (★7~9)",
+        nomal1: "NOMAL (★10~11)",
+        nomal2: "NOMAL (★12~13)",
+        hard1: "HARD (★14~15)",
+        hard2: "HARD (★16~17)",
+        extra1: "EXTRA (★18~20)",
+        extra2: "EXTRA (★21~23)",
+        extra3: "EXTRA (★24~)"
+      },
+      eventLevelList: {
+        easy: "EASY",
+        nomal: "NOMAL",
+        hard: "HARD",
+        extra: "EXTRA"
+      },
       nomalBasisPt: {
         easy1: 217,
         easy2: 231,
