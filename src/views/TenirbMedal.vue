@@ -4,26 +4,24 @@
       <form>
         <div class="c-input">
           <label>イベントは残り何日？</label>
-          <input
-            type="number"
-            v-model.number="period"
-            v-on:change="calc"
-          /><span class="c-label">日</span>
+          <input type="number" v-model.number="period" v-on:blur="calc" /><span
+            class="c-label"
+            >日</span
+          >
         </div>
         <div class="c-input">
           <label>ズバリ！ 目標は何ポイント？</label>
-          <input
-            type="number"
-            v-model.number="goalPt"
-            v-on:change="calc"
-          /><span class="c-label">Pt</span>
+          <input type="number" v-model.number="goalPt" v-on:blur="calc" /><span
+            class="c-label"
+            >Pt</span
+          >
         </div>
         <div class="c-input">
           <label>今何ポイント？</label>
           <input
             type="number"
             v-model.number="initialPt"
-            v-on:change="calc"
+            v-on:blur="calc"
           /><span class="c-label">Pt</span>
         </div>
         <div class="c-input">
@@ -33,7 +31,7 @@
             min="0"
             max="100"
             v-model.number="scoreBounusRate"
-            v-on:change="calc"
+            v-on:blur="calc"
           /><span class="c-label">%</span>
         </div>
         <div class="c-input">
@@ -45,12 +43,12 @@
             min="0"
             max="100"
             v-model.number="specialBounusRate"
-            v-on:change="calc"
+            v-on:blur="calc"
           /><span class="c-label">%</span>
         </div>
         <div class="c-pulldown">
           <label>通常曲のレベルは？</label>
-          <select v-model="nomalLevel" v-on:change="calc">
+          <select v-model="nomalLevel" v-on:blur="calc">
             <option
               v-for="(name, value) in nomalLevelList"
               :key="value"
@@ -61,7 +59,7 @@
         </div>
         <div class="c-pulldown">
           <label>イベント曲のレベルは？</label>
-          <select v-model="eventLevel" v-on:change="calc">
+          <select v-model="eventLevel" v-on:blur="calc">
             <option
               v-for="(name, value) in eventLevelList"
               :key="value"
