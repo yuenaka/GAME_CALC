@@ -1,82 +1,107 @@
 <template>
-  <div class="c-body">
-    <div class="c-form">
-      <form>
-        <div class="c-input">
-          <label>イベントは残り何日？</label>
-          <input type="number" v-model.number="period" v-on:blur="calc" /><span
-            class="c-label"
-            >日</span
-          >
+  <div class="l-body">
+    <div class="box box-left">
+      <div class="row">
+        <div class="item-title"><label>目標ポイント</label></div>
+        <div class="item-text">
+          <div class="input">
+            <input type="number" v-model.number="goalPt" v-on:blur="calc" />
+          </div>
+          <span class="unit">Pt</span>
         </div>
-        <div class="c-input">
-          <label>ズバリ！ 目標は何ポイント？</label>
-          <input type="number" v-model.number="goalPt" v-on:blur="calc" /><span
-            class="c-label"
-            >Pt</span
-          >
+      </div>
+      <div class="row">
+        <div class="item-title"><label>現在のポイント</label></div>
+        <div class="item-text">
+          <div class="input">
+            <input type="number" v-model.number="initialPt" v-on:blur="calc" />
+          </div>
+          <span class="unit">Pt</span>
         </div>
-        <div class="c-input">
-          <label>今何ポイント？</label>
-          <input
-            type="number"
-            v-model.number="initialPt"
-            v-on:blur="calc"
-          /><span class="c-label">Pt</span>
+      </div>
+      <div class="row">
+        <div class="item-title"><label>イベント残り日数</label></div>
+        <div class="item-text">
+          <div class="input">
+            <input type="number" v-model.number="period" v-on:blur="calc" />
+          </div>
+          <span class="unit">Pt</span>
         </div>
-        <div class="c-input">
-          <label>スコアボーナスはだいたい何％くらい取れる？</label>
-          <input
-            type="number"
-            min="0"
-            max="100"
-            v-model.number="scoreBounusRate"
-            v-on:blur="calc"
-          /><span class="c-label">%</span>
-        </div>
-        <div class="c-input">
-          <label
-            >特攻ボーナスは何％持ってる？（※今イベントのポイントボーナスSRは除く）</label
-          >
-          <input
-            type="number"
-            min="0"
-            max="100"
-            v-model.number="specialBounusRate"
-            v-on:blur="calc"
-          /><span class="c-label">%</span>
-        </div>
-        <div class="c-pulldown">
-          <label>通常曲のレベルは？</label>
-          <select v-model="nomalLevel" v-on:blur="calc">
-            <option
-              v-for="(name, value) in nomalLevelList"
-              :key="value"
-              :value="value"
-              >{{ name }}</option
-            >
-          </select>
-        </div>
-        <div class="c-pulldown">
-          <label>イベント曲のレベルは？</label>
-          <select v-model="eventLevel" v-on:blur="calc">
-            <option
-              v-for="(name, value) in eventLevelList"
-              :key="value"
-              :value="value"
-              >{{ name }}</option
-            >
-          </select>
-        </div>
-        <p class="c-button-primary">
-          <input type="submit" value="Send" v-on:click="calc" />
-        </p>
-        <p class="c-button-primary">
-          <input type="submit" value="Send" disabled="disabled" />
-        </p>
-      </form>
+      </div>
     </div>
-    <div class="c-result">
+    <div class="box box-left">
+      <div class="row">
+        <div class="item-title">
+          <label>平均スコアボーナス</label>
+        </div>
+        <div class="item-text">
+          <div class="input">
+            <input
+              type="number"
+              min="0"
+              max="100"
+              v-model.number="scoreBounusRate"
+              v-on:blur="calc"
+            />
+          </div>
+          <span class="unit">%</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="item-title">
+          <label>特攻ボーナス<sup>※1</sup></label>
+        </div>
+        <div class="item-text">
+          <div class="input">
+            <input
+              type="number"
+              min="0"
+              max="100"
+              v-model.number="scoreBounusRate"
+              v-on:blur="calc"
+            />
+          </div>
+          <span class="unit">%</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="item-title">
+          <label>通常曲のレベル</label>
+        </div>
+        <div class="item-text">
+          <div class="input">
+            <select v-model="nomalLevel" v-on:blur="calc">
+              <option
+                v-for="(name, value) in nomalLevelList"
+                :key="value"
+                :value="value"
+                >{{ name }}</option
+              >
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="item-title">
+          <label>イベント曲のレベル</label>
+        </div>
+        <div class="item-text">
+          <div class="input">
+            <select v-model="eventLevel" v-on:blur="calc">
+              <option
+                v-for="(name, value) in eventLevelList"
+                :key="value"
+                :value="value"
+                >{{ name }}</option
+              >
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note">※1) 今イベントのポイントボーナスSRは除く</div>
+
+    <div class="box box-right">
       <p>
         {{ period }}日で{{ goalPt }}Ptを達成するには、<br />
         1日あたり<br />

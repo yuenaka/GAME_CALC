@@ -1,0 +1,47 @@
+.l-body {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+}
+.box {
+  margin: 12px;
+  border: 1px dotted;
+}
+.row {
+  width: max;
+  border-bottom: 1px dotted;
+  margin: 4px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.item-title {
+  width: max;
+  padding: 0 8px;
+}
+.item-text {
+  width: 136px;
+  padding: 0 8px;
+  display: flex;
+}
+.input {
+  width: 100px;
+}
+.input input {
+  width: 100px;
+  text-align: right;
+}
+.unit {
+  width: 20px;
+}
+.note {
+  width: 350px;
+  text-align: right;
+  font-size: 75%;
+}
+sup {
+  font-size: 75%;
+  vertical-align: top;
+  position: relative;
+  top: 0.5em;
+}
