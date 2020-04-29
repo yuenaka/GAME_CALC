@@ -8,8 +8,7 @@
   </div>
 </template>
 
-<style lang="sass">
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap");
+<style lang="scss">
 @import "./css/reset.css";
 @import "./css/style.scss";
 </style>
