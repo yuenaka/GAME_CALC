@@ -1,6 +1,6 @@
 <template>
-  <div class="l-body">
-    <div class="box box-left">
+  <div class="l-body" id="tenirb-medal">
+    <div class="box box-goal_setting">
       <div class="row">
         <div class="item-title"><label>目標ポイント</label></div>
         <div class="item-text">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="box box-left">
+    <div class="box box-level_setting">
       <div class="row">
         <div class="item-title">
           <label>平均スコアボーナス</label>
@@ -101,15 +101,17 @@
     </div>
     <div class="note">※1) 今イベントのポイントボーナスSRは除く</div>
 
-    <div class="box box-right">
+    <div class="box box-result">
       <p>
         {{ period }}日で{{ goalPt }}Ptを達成するには、<br />
         1日あたり<br />
         通常曲を {{ nomalPlayTimes / period }} 回、<br />
         イベント曲を
-        {{ eventPlayTimes / period }} 回ほどプレイしましょう。<br />
+        {{ eventPlayTimes / period }} 回ほど<br />
+        プレイしましょう。<br />
       </p>
     </div>
+    <div class="note">※ 入力フォームのフォーカスを外すと計算処理が走ります</div>
   </div>
 </template>
 
