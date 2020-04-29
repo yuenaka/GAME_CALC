@@ -1,5 +1,6 @@
 <template>
   <div class="l-body" id="tenirb-medal">
+    <div class="note">※ 入力フォームのフォーカスを外すと計算処理が走ります</div>
     <div class="box box-goal_setting">
       <div class="row">
         <div class="item-title"><label>目標ポイント</label></div>
@@ -104,14 +105,14 @@
     <div class="box box-result">
       <p>
         {{ period }}日で{{ goalPt }}Ptを達成するには、<br />
-        1日あたり<br />
+        1日あたり{{ goalPt / period }}Pt稼ぐ必要があります。<br />
         通常曲を {{ nomalPlayTimes / period }} 回、<br />
         イベント曲を
         {{ eventPlayTimes / period }} 回ほど<br />
-        プレイしましょう。<br />
+        プレイしましょう。<sup>※2</sup><br />
       </p>
     </div>
-    <div class="note">※ 入力フォームのフォーカスを外すと計算処理が走ります</div>
+    <div class="note">※2) ブーストを使わない場合</div>
     <div class="updated">最終更新: 2020/4/29</div>
   </div>
 </template>
