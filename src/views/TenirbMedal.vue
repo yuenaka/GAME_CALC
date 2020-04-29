@@ -25,7 +25,7 @@
           <div class="input">
             <input type="number" v-model.number="period" v-on:blur="calc" />
           </div>
-          <span class="unit">Pt</span>
+          <span class="unit">日</span>
         </div>
       </div>
     </div>
@@ -112,6 +112,7 @@
       </p>
     </div>
     <div class="note">※ 入力フォームのフォーカスを外すと計算処理が走ります</div>
+    <div class="updated">最終更新: 2020/4/29</div>
   </div>
 </template>
 
@@ -176,7 +177,6 @@ export default {
   },
   methods: {
     calc: function() {
-      // todo levelが不正の場合エラーにする
       let pt = this.initialPt;
       let medals = 0;
       // 初期化
