@@ -183,20 +183,21 @@ export default {
       // 初期化
       this.nomalPlayTimes = this.eventPlayTimes = 0;
       while (pt < this.goalPt) {
-        this.nomalPlayTimes++;
-        pt += (1 + this.getBounusRate(pt)) * this.nomalBasisPt[this.nomalLevel];
-        if (pt >= this.goalPt) {
-          return;
-        }
-        medals += this.gainMedal;
-
         // イベント曲
-        if (medals >= this.usedMedal[this.eventLevel]) {
+        while (medals >= this.usedMedal[this.eventLevel]) {
           this.eventPlayTimes++;
           pt +=
             (1 + this.getBounusRate(pt)) * this.eventBasisPt[this.eventLevel];
           medals -= this.usedMedal[this.eventLevel];
+          if (pt >= this.goalPt) {
+            return;
+          }
         }
+        // 通常曲
+        this.nomalPlayTimes++;
+        pt += (1 + this.getBounusRate(pt)) * this.nomalBasisPt[this.nomalLevel];
+        medals += this.gainMedal;
+
         // 無限ループ回避
         if (this.nomalPlayTimes > 10000) {
           return;
