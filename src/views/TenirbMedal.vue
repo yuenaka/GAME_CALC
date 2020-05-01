@@ -21,6 +21,21 @@
         </div>
       </div>
       <div class="row">
+        <div class="item-title">
+          <label>現在の所持メダル (購入予定含む)</label>
+        </div>
+        <div class="item-text">
+          <div class="input">
+            <input
+              type="number"
+              v-model.number="initialMedal"
+              v-on:blur="calc"
+            />
+          </div>
+          <span class="unit">枚</span>
+        </div>
+      </div>
+      <div class="row">
         <div class="item-title"><label>イベント残り日数</label></div>
         <div class="item-text">
           <div class="input">
@@ -166,6 +181,7 @@ export default {
       // 入力値
       goalPt: 1000000,
       initialPt: 0,
+      initialMedal: 0,
       period: 10,
       scoreBounusRate: 15,
       specialBounusRate: 0,
@@ -179,7 +195,7 @@ export default {
   methods: {
     calc: function() {
       let pt = this.initialPt;
-      let medals = 0;
+      let medals = this.initialMedal;
       // 初期化
       this.nomalPlayTimes = this.eventPlayTimes = 0;
       while (pt < this.goalPt) {
