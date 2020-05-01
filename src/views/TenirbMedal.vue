@@ -58,7 +58,7 @@
               type="number"
               min="0"
               max="100"
-              v-model.number="scoreBounusRate"
+              v-model.number="specialBounusRate"
               v-on:blur="calc"
             />
           </div>
