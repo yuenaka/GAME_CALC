@@ -120,10 +120,10 @@
     <div class="box box-result">
       <p>
         {{ period }}日で{{ goalPt }}Ptを達成するには、<br />
-        1日あたり{{ goalPt / period }}Pt稼ぐ必要があります。<br />
-        通常曲を {{ nomalPlayTimes / period }} 回、<br />
+        1日あたり{{ (goalPt / period).toFixed(1) }}Pt稼ぐ必要があります。<br />
+        通常曲を {{ Math.ceil(nomalPlayTimes / period) }} 回、<br />
         イベント曲を
-        {{ eventPlayTimes / period }} 回ほど<br />
+        {{ Math.ceil(eventPlayTimes / period) }} 回ほど<br />
         プレイしましょう。<sup>※2</sup><br />
       </p>
     </div>
