@@ -157,10 +157,12 @@
   width: 20px;
 }
 .note {
-  padding: 4px 12px;
+  margin: 4px 12px;
   text-align: left;
   font-size: 80%;
   font-weight: 300;
+  text-indent: -2em;
+  padding-left: 2em;
 }
 .bold {
   font-weight: 700;
