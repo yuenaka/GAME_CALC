@@ -86,7 +86,13 @@
         </div>
         <div class="item-text">
           <div class="input">
-            <input type="checkbox" v-model="isUseSR" v-on:blur="calc" />
+            <input
+              id="isUseSR"
+              type="checkbox"
+              v-model="isUseSR"
+              v-on:change="calc"
+            />
+            <label for="isUseSR" class="checkbox">&thinsp;</label>
           </div>
         </div>
       </div>
