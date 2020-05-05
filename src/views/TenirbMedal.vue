@@ -65,7 +65,7 @@
       </div>
       <div class="row">
         <div class="item-title">
-          <label>特攻ボーナス<sup>※1</sup></label>
+          <label>特攻ボーナス</label>
         </div>
         <div class="item-text">
           <div class="input">
@@ -78,6 +78,22 @@
             />
           </div>
           <span class="unit">%</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="item-title">
+          <label> ―ポイボSRの特攻ボーナスを加算する<sup>※1</sup></label>
+        </div>
+        <div class="item-text">
+          <div class="input">
+            <input
+              id="isUseSR"
+              type="checkbox"
+              v-model="isUseSR"
+              v-on:change="calc"
+            />
+            <label for="isUseSR" class="checkbox">&thinsp;</label>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -115,7 +131,12 @@
         </div>
       </div>
     </div>
-    <div class="note">※1) 今イベントのポイントボーナスSRは除く</div>
+    <div class="note">
+      ※1)
+      チェックが入っている場合、累計ポイントがポイボSR取得ラインに到達した時点からポイボSRの特攻ボーナスを加算します。<br />
+      ポイボSRをオーダーに組み込まない場合はチェックを外してください。<br />
+      チェックを入れた場合、「特攻ボーナス」にはポイボSR分を除いた数値を入力してください。
+    </div>
 
     <div class="box box-result">
       <p>
@@ -185,6 +206,7 @@ export default {
       period: 10,
       scoreBounusRate: 15,
       specialBounusRate: 0,
+      isUseSR: true,
       nomalLevel: "easy1",
       eventLevel: "easy",
       // 結果
@@ -230,6 +252,9 @@ export default {
       );
     },
     getEventSpecialBounusRate: function(pt) {
+      if (!this.isUseSR) {
+        return 0;
+      }
       if (pt < 60000) {
         return 0;
       } else if (pt < 90000) {
