@@ -146,7 +146,7 @@
       </p>
     </div>
     <div class="note">※2) ブーストを使わない場合</div>
-    <div class="updated">最終更新: 2020/4/29</div>
+    <div class="updated">最終更新: 2020/5/6</div>
   </div>
 </template>
 
