@@ -26,11 +26,11 @@
       </div>
       <div class="row">
         <div class="item-title">
-          <label>現在の所持メダル (購入予定含む)</label>
+          <label>現在の所持ピース (購入予定含む)</label>
         </div>
         <div class="item-text">
           <div class="input">
-            <input type="number" v-model.number="initialMedal" v-on:blur="calc" />
+            <input type="number" v-model.number="initialPiece" v-on:blur="calc" />
           </div>
           <span class="unit">枚</span>
         </div>
@@ -173,24 +173,19 @@ export default {
         extra: "EXTRA"
       },
       nomalBasisPt: {
-        easy1: 217,
-        easy2: 231,
-        nomal1: 245,
-        nomal2: 259,
-        hard1: 274,
-        hard2: 288,
-        extra1: 304,
-        extra2: 320,
-        extra3: 336
+        easy1: 107,
+        easy2: 114,
+        nomal1: 121,
+        nomal2: 128,
+        hard1: 135,
+        hard2: 142,
+        extra1: 150,
+        extra2: 158,
+        extra3: 165
       },
-      eventBasisPt: {
-        easy: 1100,
-        nomal: 1320,
-        hard: 1760,
-        extra: 2200
-      },
-      gainMedal: 45, // todo 変数にする？
-      usedMedal: {
+      eventBasisPt: 200,
+      gainPiece: 45, // todo 変数にする？
+      usedPiece: {
         easy: 100,
         nomal: 120,
         hard: 160,
@@ -199,13 +194,15 @@ export default {
       // 入力値
       goalPt: 1000000,
       initialPt: 0,
-      initialMedal: 0,
+      initialPiece: 0,
       period: 10,
       scoreBounusRate: 15,
       specialBounusRate: 0,
       isUseSR: true,
       nomalLevel: "easy1",
       eventLevel: "easy",
+      // todo 入力フォーム作成
+      satisfaction: 1500, // todo 色ボーナス1.5倍の値
       // 結果
       nomalPlayTimes: 0,
       eventPlayTimes: 0
@@ -214,16 +211,15 @@ export default {
   methods: {
     calc: function() {
       let pt = this.initialPt;
-      let medals = this.initialMedal;
+      let pieces = this.initialPiece;
       // 初期化
       this.nomalPlayTimes = this.eventPlayTimes = 0;
       while (pt < this.goalPt) {
         // イベント曲
-        while (medals >= this.usedMedal[this.eventLevel]) {
+        while (pieces >= this.usedPiece[this.eventLevel]) {
           this.eventPlayTimes++;
-          pt +=
-            (1 + this.getBounusRate(pt)) * this.eventBasisPt[this.eventLevel];
-          medals -= this.usedMedal[this.eventLevel];
+          pt += (1 + this.getBounusRate(pt)) * this.eventBasisPt;
+          pieces -= this.usedPiece[this.eventLevel];
           if (pt >= this.goalPt) {
             return;
           }
@@ -231,7 +227,7 @@ export default {
         // 通常曲
         this.nomalPlayTimes++;
         pt += (1 + this.getBounusRate(pt)) * this.nomalBasisPt[this.nomalLevel];
-        medals += this.gainMedal;
+        pieces += this.gainPiece;
 
         // 無限ループ回避
         if (this.nomalPlayTimes > 10000) {
@@ -252,15 +248,15 @@ export default {
       if (!this.isUseSR) {
         return 0;
       }
-      if (pt < 60000) {
+      if (pt < 50000) {
         return 0;
       } else if (pt < 90000) {
         return 10;
-      } else if (pt < 120000) {
+      } else if (pt < 130000) {
         return 12;
-      } else if (pt < 150000) {
+      } else if (pt < 170000) {
         return 14;
-      } else if (pt < 200000) {
+      } else if (pt < 210000) {
         return 16;
       } else if (pt < 250000) {
         return 18;
@@ -268,11 +264,11 @@ export default {
         return 20;
       } else if (pt < 400000) {
         return 21;
-      } else if (pt < 500000) {
+      } else if (pt < 550000) {
         return 22;
-      } else if (pt < 600000) {
-        return 23;
       } else if (pt < 700000) {
+        return 23;
+      } else if (pt < 850000) {
         return 24;
       } else {
         // 70万Pt以上で完凸
