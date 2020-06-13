@@ -8,17 +8,22 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/tenirb-medal",
     name: "Tenirb_medal",
-    component: () => import("../views/TenirbMedal.vue")
-  }
+    component: () => import("../views/TenirbMedal.vue"),
+  },
+  {
+    path: "/tenirb-contact",
+    name: "Tenirb_contact",
+    component: () => import("../views/TenirbContact.vue"),
+  },
 ];
 
 const router = new VueRouter({
-  routes
+  routes,
 });
 
 export default router;
